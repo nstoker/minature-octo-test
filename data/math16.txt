@@ -1,0 +1,330 @@
+Crasm LYB 1.3:                                                   page  1
+
+                         1  ;;; Author: Leon Bottou
+                         2  ;;; Public Domain.
+                         3  
+                         4  
+                         5          cpu 6502
+                         6          output hex
+                         7  
+                         8  ; 16 bit calculus functions.
+                         9  ; Two pseudoregisters: ACC, ARG
+                        10  ; Four temporary bytes: TEMP
+                        11  
+                        12          dummy
+                        13  
+  0020                  14        *  = $20
+  0020                  15  acc      ds 2
+  0022                  16  arg      ds 2
+  0024                  17  temp     ds 4
+                        18  
+                        19  
+                        20  movi    macro
+                        21          lda #(\1) & $ff
+                        22          sta \2
+                        23          lda #(\1) >> 8
+                        24          sta (\2)+1
+                        25          endm
+                        26  
+                        27  movm    macro
+                        28          lda \1
+                        29          sta \2
+                        30          lda (\1)+1
+                        31          sta (\2)+2
+                        32          endm
+                        33  
+  8000                  34     * = $8000
+                        35  
+                        36          code
+                        37  
+8000 A520               38  add16   lda acc   ; ACC <- ACC + ARG
+8002 18                 39          clc
+8003 6522               40          adc arg
+8005 8520               41          sta acc
+8007 A521               42          lda acc+1
+8009 6523               43          adc arg+1
+800B 8521               44          sta acc+1
+800D 60                 45          rts
+                        46  
+800E A900               47  clr16   lda #0    ; clear ACC
+8010 8520               48          sta acc
+8012 8521               49          sta acc+1
+8014 60                 50  .1      rts
+                        51  
+8015 2421               52  abs16   bit acc+1 ; absolute value of ACC
+8017 10FB               53          bpl .1
+8019 A900               54  neg16   lda #0    ; negate ACC
+801B 38                 55          sec
+801C E520               56          sbc acc
+801E 8520               57          sta acc
+8020 A900               58          lda #0
+8022 E521               59          sbc acc+1
+8024 8521               60          sta acc+1
+8026 60                 61          rts
+                        62  
+
+
+Crasm LYB 1.3:                                                   page  2
+
+8027 A900               63  neg16a  lda #0    ; negate ARG
+8029 38                 64          sec
+802A E522               65          sbc arg
+802C 8522               66          sta arg
+802E A900               67          lda #0
+8030 E523               68          sbc arg+1
+8032 8523               69          sta arg+1
+8034 60                 70          rts
+                        71  
+8035 A520               72  sub16   lda acc   ; ACC <- ACC - ARG
+8037 38                 73          sec
+8038 E522               74          sbc arg
+803A 8520               75          sta acc
+803C A521               76          lda acc+1
+803E E523               77          sbc arg+1
+8040 8521               78          sta acc+1
+8042 60                 79          rts
+                        80  
+                        81          code
+                        82  
+8043 2C4680             83  ovfl    bit .ov1
+8046 60                 84  .ov1    rts
+                        85  
+                        86          code
+                        87  
+8047 A521               88  muls16  lda acc+1 ; ACC <- ACC * ARG
+8049 4523               89          eor arg+1
+804B 8527               90          sta temp+3
+                        91  
+804D 2423               92          bit arg+1
+804F 1003               93          bpl .0
+8051 202780             94          jsr neg16a
+8054 201580             95  .0      jsr abs16
+                        96  
+8057 A980               97          lda #$80
+8059 8525               98          sta temp+1
+805B A900               99          lda #0
+805D 8524              100          sta temp
+805F 8526              101          sta temp+2
+8061 4621              102  .1      lsr acc+1
+8063 4620              103          lsr acc
+8065 900B              104          bcc .2
+8067 48                105          pha
+8068 A526              106          lda temp+2
+806A 18                107          clc
+806B 6522              108          adc arg
+806D 8526              109          sta temp+2
+806F 68                110          pla
+8070 6523              111          adc arg+1
+8072 6A                112  .2      ror
+8073 6626              113          ror temp+2
+8075 6625              114          ror temp+1
+8077 6624              115          ror temp
+8079 90E6              116          bcc .1
+807B 0526              117          ora temp+2
+807D 08                118          php
+807E A5248520A52585
+8085 22                119          movm temp,acc
+8086 28                120          plp
+8087 D0BA              121          bne ovfl
+8089 2421              122          bit acc+1
+808B 30B6              123          bmi ovfl
+
+
+Crasm LYB 1.3:                                                   page  3
+
+808D 2427              124          bit temp+3
+808F 1003              125          bpl .3
+8091 201980            126          jsr neg16
+8094 60                127  .3      rts
+                       128  
+                       129          code
+                       130  
+8095 A5208524A52185
+809C 26                131  divmod  movm acc,temp    ; ACC <- ACC / ARG (uns
+igned)
+809D A901              132          lda #$01         ; TEMP+2 <- ACC % ARG (
+unsigned)
+809F 8520              133          sta acc
+80A1 0A                134          asl
+80A2 8526              135          sta temp+2
+80A4 8527              136          sta temp+3
+80A6 8521              137          sta acc+1
+80A8 A522              138          lda arg
+80AA 0522              139          ora arg
+80AC F095              140          beq ovfl
+80AE 0624              141  .1      asl temp
+80B0 2625              142          rol temp+1
+80B2 2626              143          rol temp+2
+80B4 2627              144          rol temp+3
+80B6 A526              145          lda temp+2
+80B8 C522              146          cmp arg
+80BA A527              147          lda temp+3
+80BC E523              148          sbc arg+1
+80BE 9009              149          bcc .2
+80C0 8527              150          sta temp+3
+80C2 A526              151          lda temp+2
+80C4 E522              152          sbc arg
+80C6 8526              153          sta temp+2
+80C8 38                154          sec
+80C9 2620              155  .2      rol acc
+80CB 2621              156          rol acc+1
+80CD 90DF              157          bcc .1
+80CF 60                158          rts
+                       159  
+                       160          code
+                       161  
+80D0 A521              162  divs16  lda acc+1   ; ACC <- ACC / ARG
+80D2 4523              163          eor arg+1
+80D4 48                164          pha
+80D5 2423              165          bit arg+1
+80D7 1003              166          bpl .0
+80D9 202780            167          jsr neg16a
+80DC 201580            168  .0      jsr abs16
+80DF 209580            169          jsr divmod
+80E2 68                170          pla
+80E3 1003              171          bpl .1
+80E5 4C1980            172          jmp neg16
+80E8 60                173  .1      rts
+                       174  
+                       175          code
+                       176  
+80E9 A521              177  mod16   lda acc+1   ; ACC <- ACC % ARG
+80EB 48                178          pha
+80EC 2423              179          bit arg+1
+80EE 1003              180          bpl .0
+80F0 202780            181          jsr neg16a
+80F3 201580            182  .0      jsr abs16
+
+
+Crasm LYB 1.3:                                                   page  4
+
+80F6 209580            183          jsr divmod
+80F9 A5268520A52785
+8100 22                184          movm temp+2,acc
+8101 68                185          pla
+8102 1003              186          bpl .1
+8104 4C1980            187          jmp neg16
+8107 60                188  .1      rts
+                       189  
+
+ERRORS:       0
+WARNINGS:     0
+
+Successful assembly...
+ Last address     8107 (33031)
+ Code length       210 (528)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Crasm LYB 1.3:                                                   page  5
+
+ 8015   Abs ABS16                                            
+ 0020   Abs ACC                                              
+?8000   Abs ADD16                                            
+ 0022   Abs ARG                                              
+?800E   Abs CLR16                                            
+ 8095   Abs DIVMOD                                           
+?80D0   Abs DIVS16                                           
+?80E9   Abs MOD16                                            
+?     Macro MOVI                                             
+      Macro MOVM                                             
+?8047   Abs MULS16                                           
+ 8019   Abs NEG16                                            
+ 8027   Abs NEG16A                                           
+ 8043   Abs OVFL                                             
+?8035   Abs SUB16                                            
+ 0024   Abs TEMP                                             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

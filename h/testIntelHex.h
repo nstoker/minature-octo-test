@@ -1,3 +1,4 @@
+
 /*     This file is part of Test65.
 
     Test65 is free software: you can redistribute it and/or modify
@@ -13,22 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with Test65.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <iostream>
-#include "testIntelHex.h"
 
-using namespace std;
+// This file deals with the testing of the intel hex format
 
-int main()
-{
-    cout << "Console Simulator for the lib65 project" << endl
-         << "Licenced under GPL v3, (c) 2012 Neil Stoker"<<endl;
-
-    if (!testIntelHex())
-    {
-        cout<<"testIntelHex failed."<<endl;
-        exit(EXIT_FAILURE);
-    }
-
-    cout <<"test65 Exiting."<< endl;
-    return 0;
-}
+bool testIntelHex(void);

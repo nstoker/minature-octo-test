@@ -13,22 +13,13 @@
     You should have received a copy of the GNU General Public License
     along with Test65.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <iostream>
+
+// This file deals with the testing of the intel hex format
+
 #include "testIntelHex.h"
 
-using namespace std;
-
-int main()
+bool testIntelHex(void)
 {
-    cout << "Console Simulator for the lib65 project" << endl
-         << "Licenced under GPL v3, (c) 2012 Neil Stoker"<<endl;
 
-    if (!testIntelHex())
-    {
-        cout<<"testIntelHex failed."<<endl;
-        exit(EXIT_FAILURE);
-    }
-
-    cout <<"test65 Exiting."<< endl;
-    return 0;
+    return false; // Ok, we've failed
 }

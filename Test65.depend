@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1354800190 source:/Users/ns/Projects/Sim65/minature-octo-test/src/main.cpp
+	<iostream>
+	"testIntelHex.h"
+
+1354800062 source:/Users/ns/Projects/Sim65/minature-octo-test/src/testIntelHex.cpp
+	"testIntelHex.h"
+
+1354800065 /Users/ns/Projects/Sim65/minature-octo-test/h/testIntelHex.h
+
