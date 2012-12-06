@@ -6,33 +6,50 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="OSX Debug">
+				<Option platforms="Mac;" />
 				<Option output="bin/Debug/Test65" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
+					<Add option="-arch i386" />
+					<Add option="`wx-config --cflags`" />
 				</Compiler>
+				<Linker>
+					<Add option="-arch i386" />
+					<Add option="`wx-config --libs`" />
+				</Linker>
 			</Target>
-			<Target title="Release">
+			<Target title="OSX Release">
+				<Option platforms="Mac;" />
 				<Option output="bin/Release/Test65" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
+					<Add option="-arch i386" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
+					<Add option="-arch i386" />
 				</Linker>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
+			<Add directory="h" />
+			<Add directory="src" />
 		</Compiler>
+		<Linker>
+			<Add library="../lib65/lib65.a" />
+		</Linker>
+		<Unit filename="h/testIntelHex.h" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/testIntelHex.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
