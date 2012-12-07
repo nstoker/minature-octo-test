@@ -3,8 +3,165 @@
 	<iostream>
 	"testIntelHex.h"
 
-1354800062 source:/Users/ns/Projects/Sim65/minature-octo-test/src/testIntelHex.cpp
+1354806857 source:/Users/ns/Projects/Sim65/minature-octo-test/src/testIntelHex.cpp
+	<iostream>
+	<wx/string.h>
 	"testIntelHex.h"
+	"Memory.h"
+	"../../lib65/include/readIntelHex.h"
 
 1354800065 /Users/ns/Projects/Sim65/minature-octo-test/h/testIntelHex.h
+
+1210566405 /usr/include/wx-2.8/wx/string.h
+	"wx/defs.h"
+	<ctype.h>
+	<stdio.h>
+	<string.h>
+	<stdarg.h>
+	<limits.h>
+	<string.h>
+	<stdio.h>
+	<stdarg.h>
+	<limits.h>
+	<stdlib.h>
+	<strings.h>
+	<StringMgr.h>
+	"wx/wxchar.h"
+	"wx/buffer.h"
+	"wx/strconv.h"
+	"wx/beforestd.h"
+	<string>
+	"wx/afterstd.h"
+	"wx/arrstr.h"
+	"wx/iosfwrap.h"
+
+1210566405 /usr/include/wx-2.8/wx/defs.h
+	"wx/platform.h"
+	"wx/features.h"
+	"wx/version.h"
+	"wx/dlimpexp.h"
+	"wx/debug.h"
+	<stddef.h>
+	<sys/types.h>
+	<unistd.h>
+	"wx/msw/winundef.h"
+
+1212968266 /usr/include/wx-2.8/wx/platform.h
+	<stddef.h>
+	<AvailabilityMacros.h>
+	<unistd.h>
+	"wx/mac/carbon/config_xcode.h"
+	"wx/setup.h"
+	"wx/chkconf.h"
+	"wx/msw/wince/libraries.h"
+	"wx/msw/libraries.h"
+	"wx/msw/gccpriv.h"
+	<AvailabilityMacros.h>
+
+1287927466 /usr/lib/wx/include/mac-unicode-debug-2.8/wx/setup.h
+
+1189545923 /usr/include/wx-2.8/wx/chkconf.h
+	"wx/palmos/chkconf.h"
+	"wx/msw/wince/chkconf.h"
+	"wx/msw/chkconf.h"
+	"wx/mac/chkconf.h"
+	"wx/os2/chkconf.h"
+	"wx/mgl/chkconf.h"
+	"wx/dfb/chkconf.h"
+	"wx/motif/chkconf.h"
+	"wx/x11/chkconf.h"
+	"wx/univ/chkconf.h"
+
+1183577097 /usr/include/wx-2.8/wx/mac/chkconf.h
+	"wx/mac/classic/chkconf.h"
+	"wx/mac/carbon/chkconf.h"
+
+1190406424 /usr/include/wx-2.8/wx/mac/carbon/chkconf.h
+
+1183577097 /usr/include/wx-2.8/wx/features.h
+
+1216442329 /usr/include/wx-2.8/wx/version.h
+	"wx/cpp.h"
+
+1183577097 /usr/include/wx-2.8/wx/cpp.h
+
+1194896010 /usr/include/wx-2.8/wx/dlimpexp.h
+
+1216442329 /usr/include/wx-2.8/wx/debug.h
+	<assert.h>
+	<limits.h>
+	"wx/wxchar.h"
+
+1204317136 /usr/include/wx-2.8/wx/wxchar.h
+	"wx/platform.h"
+	"wx/dlimpexp.h"
+	<stdio.h>
+	<stdarg.h>
+	<sys/types.h>
+	<wchar.h>
+	<wcstr.h>
+	<stdlib.h>
+	<widec.h>
+	<ctype.h>
+	<memory.h>
+	<stddef.h>
+	<stddef.h>
+	<string.h>
+	<ctype.h>
+	<tchar.h>
+	<ctype.h>
+	<ctype.h>
+	<stdio.h>
+	<wctype.h>
+	<stdio.h>
+	<stdio.h>
+	<ctype.h>
+	<string.h>
+	<stdio.h>
+	<time.h>
+	<time.h>
+	<string.h>
+
+1183577097 /usr/include/wx-2.8/wx/buffer.h
+	"wx/wxchar.h"
+	<stdlib.h>
+
+1183577099 /usr/include/wx-2.8/wx/strconv.h
+	"wx/defs.h"
+	"wx/wxchar.h"
+	"wx/buffer.h"
+	"typeinfo.h"
+	<stdlib.h>
+	"wx/fontenc.h"
+
+1183577097 /usr/include/wx-2.8/wx/fontenc.h
+
+1183577097 /usr/include/wx-2.8/wx/beforestd.h
+
+1183577096 /usr/include/wx-2.8/wx/afterstd.h
+	"wx/msw/winundef.h"
+
+1183577096 /usr/include/wx-2.8/wx/arrstr.h
+	"wx/defs.h"
+	"wx/string.h"
+	"wx/dynarray.h"
+
+1183577097 /usr/include/wx-2.8/wx/dynarray.h
+	"wx/defs.h"
+	"wx/beforestd.h"
+	<vector>
+	<algorithm>
+	"wx/afterstd.h"
+
+1183577097 /usr/include/wx-2.8/wx/iosfwrap.h
+	<iostream.h>
+	<iosfwd>
+	"wx/msw/winundef.h"
+
+1354801468 /Users/ns/Projects/Sim65/lib65/include/readIntelHex.h
+	<map>
+	<wx/string.h>
+	"memory.h"
+
+1354478484 /Users/ns/Projects/Sim65/lib65/include/memory.h
 

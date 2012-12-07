@@ -16,10 +16,39 @@
 
 // This file deals with the testing of the intel hex format
 
+#include <iostream>
+#include <wx/string.h>
 #include "testIntelHex.h"
+#include "Memory.h"
+
+#include "../../lib65/include/readIntelHex.h"
+
+bool testIHfoe(wxString fname)
+{
+    std::cout<<"\tImporting '"<<fname.mb_str()<<"'. ";
+    bool rv=false;
+    readIntelHex rh;
+    Memory *mem;
+
+    if(rh.openFile(fname,mem))
+    {
+        std::cout<< "loaded ok";
+        rv=true;
+    } else {
+        std::cout<< "FAILED.";
+    }
+
+    std::cout<<std::endl;
+    return rv;
+}
 
 bool testIntelHex(void)
 {
-
-    return false; // Ok, we've failed
+    readIntelHex rh;
+    Memory *mem;
+    std::cout<<"Testing intelHex format file import"<<std::endl;
+    bool rv=true;
+    rv = rv && testIHfoe(wxT("/Users/ns/Projects/Sim65/minature-octo-test/data/test.hex"));
+    rv = rv && testIHfoe(wxT("/Users/ns/Projects/Sim65/minature-octo-test/data/test6502.hex"));
+    return true; // Ok, we've failed
 }

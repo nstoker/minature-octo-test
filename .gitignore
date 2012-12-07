@@ -11,5 +11,8 @@
 *.lai
 *.la
 *.a
+
+# Local stuff
 bin/
 Test65.layout
+*.log
