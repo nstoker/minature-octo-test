@@ -32,18 +32,18 @@ bool testIHfoe(wxString fname,address addr,vector<byte> data)
     cout<<"\tImporting '"<<fname.mb_str()<<"'. ";
     bool rv=true;
     readIntelHex rh;
-    Memory *mem; // TODO Check memory location(s) contain the correct data.
+    Memory mem; // TODO Check memory location(s) contain the correct data.
 
-    if(0&&rh.openFile(fname,mem))
+    if(rh.openFile(fname,&mem))
     {
         vector<byte>::iterator it=data.begin();
         for(vector<byte>::iterator it=data.begin();it!=data.end();++it)
         {
-            if(*it!=mem->read(addr))
+            if(*it!=mem.read(addr))
            {
                cout.setf(ios::hex,ios::basefield);
                cout.setf(ios::showbase);
-               cout<<endl<<"\t\tAt "<< addr<< " expected "<< *it<<" got "<<mem->read(addr);
+               cout<<endl<<"\t\tAt "<< addr<< " expected "<< *it<<" got "<<mem.read(addr);
                rv=false;
            }
 
@@ -54,8 +54,6 @@ bool testIHfoe(wxString fname,address addr,vector<byte> data)
         cout<< "failed to load into memory.";
         rv=false;
     }
-    mem->dump();
-    cout<<endl;
     return rv;
 }
 
@@ -66,20 +64,13 @@ bool testIntelHex(void)
     cout<<"Testing intelHex format file import"<<endl;
 
     bool rv;
-    int myints[]={0x02u,0x33u,0x37u};
+    int myints[]={0x02u,0x33u,0x7Au};
     vector<byte> data(myints,myints+sizeof(myints)/sizeof(byte));
 
-    cout.setf(ios::hex,ios::basefield);
-    cout.setf(ios::showbase);
-
-    for(address i=0;i<sizeof(data)/sizeof(data[0]);i++)
-    {
-
-        cout<< i+ 0x0030 <<"\t";
-        cout<<data[i]<<endl;
-    }
     wxString fName=wxT("/Users/ns/Projects/Sim65/minature-octo-test/data/test.hex");
     rv = testIHfoe(fName, 0x0030, data); //03 0030 00 02337A 1E
+    if(rv)
+        cout<<" successfully loaded"<<endl;
 
-    return true; // Ok, we've failed
+    return rv;
 }

@@ -26,19 +26,19 @@ int main()
 
     try
     {
-        if (!testMemory())
-        {
-            cout<<"testMemory failed."<<endl;
-            exit(EXIT_FAILURE);
-        }
-
-
-
-//        if (!testIntelHex())
+//        if (!testMemory())
 //        {
-//            cout<<"testIntelHex failed."<<endl;
+//            cout<<"testMemory failed."<<endl;
 //            exit(EXIT_FAILURE);
 //        }
+
+
+
+        if (!testIntelHex())
+        {
+            cout<<"testIntelHex failed."<<endl;
+            exit(EXIT_FAILURE);
+        }
     }
     catch (int e)
     {
