@@ -29,16 +29,17 @@ using namespace std;
 bool setBitPattern(byte data)
 {
     bool success=true;
-    Memory *mem;
+    Memory mem;
+
     int addr;
-    for(addr=0xFFFF;addr>0;addr--)
+    for(addr=0;addr<0x10000;addr++)
     {
-        mem->write(addr,data);
+        mem.write(addr,data);
     }
 
     for(addr=0;addr<0x10000;addr++)
     {
-        byte got=mem->read(addr);
+        byte got=mem.read(addr);
         if(got!=data)
         {
             cout<<"Failed setBitPattern("<<data<<") at "<< addr<< " with "<<(int)got <<endl;
