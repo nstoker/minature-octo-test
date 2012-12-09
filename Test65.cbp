@@ -10,6 +10,7 @@
 				<Option platforms="Mac;" />
 				<Option output="bin/Debug/Test65" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
+				<Option external_deps="../lib65/lib65.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -26,6 +27,7 @@
 				<Option platforms="Mac;" />
 				<Option output="bin/Release/Test65" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
+				<Option external_deps="../lib65/lib65.a;" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -47,7 +49,9 @@
 		<Linker>
 			<Add library="../lib65/lib65.a" />
 		</Linker>
+		<Unit filename="h/TestMemory.h" />
 		<Unit filename="h/testIntelHex.h" />
+		<Unit filename="src/TestMemory.cpp" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/testIntelHex.cpp" />
 		<Extensions>

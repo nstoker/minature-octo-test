@@ -1,16 +1,19 @@
 # depslib dependency file v1.0
-1354800190 source:/Users/ns/Projects/Sim65/minature-octo-test/src/main.cpp
+1355004097 source:/Users/ns/Projects/Sim65/minature-octo-test/src/main.cpp
 	<iostream>
+	"TestMemory.h"
 	"testIntelHex.h"
 
-1354806857 source:/Users/ns/Projects/Sim65/minature-octo-test/src/testIntelHex.cpp
+1355002863 source:/Users/ns/Projects/Sim65/minature-octo-test/src/testIntelHex.cpp
 	<iostream>
+	<vector>
 	<wx/string.h>
 	"testIntelHex.h"
 	"Memory.h"
 	"../../lib65/include/readIntelHex.h"
+	"../../lib65/include/memory.h"
 
-1354800065 /Users/ns/Projects/Sim65/minature-octo-test/h/testIntelHex.h
+1354891221 /Users/ns/Projects/Sim65/minature-octo-test/h/testIntelHex.h
 
 1210566405 /usr/include/wx-2.8/wx/string.h
 	"wx/defs.h"
@@ -158,10 +161,18 @@
 	<iosfwd>
 	"wx/msw/winundef.h"
 
-1354801468 /Users/ns/Projects/Sim65/lib65/include/readIntelHex.h
+1354889897 /Users/ns/Projects/Sim65/lib65/include/readIntelHex.h
 	<map>
 	<wx/string.h>
 	"memory.h"
 
-1354478484 /Users/ns/Projects/Sim65/lib65/include/memory.h
+1355001520 /Users/ns/Projects/Sim65/lib65/include/memory.h
+
+1355005379 source:/Users/ns/Projects/Sim65/minature-octo-test/src/TestMemory.cpp
+	<iostream>
+	<wx/string.h>
+	"testMemory.h"
+	"../../lib65/include/memory.h"
+
+1354895407 /Users/ns/Projects/Sim65/minature-octo-test/h/TestMemory.h
 

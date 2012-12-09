@@ -17,38 +17,69 @@
 // This file deals with the testing of the intel hex format
 
 #include <iostream>
+#include <vector>
 #include <wx/string.h>
 #include "testIntelHex.h"
 #include "Memory.h"
 
+using namespace std;
+
 #include "../../lib65/include/readIntelHex.h"
+#include "../../lib65/include/memory.h"
 
-bool testIHfoe(wxString fname)
+bool testIHfoe(wxString fname,address addr,vector<byte> data)
 {
-    std::cout<<"\tImporting '"<<fname.mb_str()<<"'. ";
-    bool rv=false;
+    cout<<"\tImporting '"<<fname.mb_str()<<"'. ";
+    bool rv=true;
     readIntelHex rh;
-    Memory *mem;
+    Memory *mem; // TODO Check memory location(s) contain the correct data.
 
-    if(rh.openFile(fname,mem))
+    if(0&&rh.openFile(fname,mem))
     {
-        std::cout<< "loaded ok";
-        rv=true;
-    } else {
-        std::cout<< "FAILED.";
-    }
+        vector<byte>::iterator it=data.begin();
+        for(vector<byte>::iterator it=data.begin();it!=data.end();++it)
+        {
+            if(*it!=mem->read(addr))
+           {
+               cout.setf(ios::hex,ios::basefield);
+               cout.setf(ios::showbase);
+               cout<<endl<<"\t\tAt "<< addr<< " expected "<< *it<<" got "<<mem->read(addr);
+               rv=false;
+           }
 
-    std::cout<<std::endl;
+           addr++;
+        }
+
+    } else {
+        cout<< "failed to load into memory.";
+        rv=false;
+    }
+    mem->dump();
+    cout<<endl;
     return rv;
 }
 
 bool testIntelHex(void)
 {
     readIntelHex rh;
-    Memory *mem;
-    std::cout<<"Testing intelHex format file import"<<std::endl;
-    bool rv=true;
-    rv = rv && testIHfoe(wxT("/Users/ns/Projects/Sim65/minature-octo-test/data/test.hex"));
-    rv = rv && testIHfoe(wxT("/Users/ns/Projects/Sim65/minature-octo-test/data/test6502.hex"));
+
+    cout<<"Testing intelHex format file import"<<endl;
+
+    bool rv;
+    int myints[]={0x02u,0x33u,0x37u};
+    vector<byte> data(myints,myints+sizeof(myints)/sizeof(byte));
+
+    cout.setf(ios::hex,ios::basefield);
+    cout.setf(ios::showbase);
+
+    for(address i=0;i<sizeof(data)/sizeof(data[0]);i++)
+    {
+
+        cout<< i+ 0x0030 <<"\t";
+        cout<<data[i]<<endl;
+    }
+    wxString fName=wxT("/Users/ns/Projects/Sim65/minature-octo-test/data/test.hex");
+    rv = testIHfoe(fName, 0x0030, data); //03 0030 00 02337A 1E
+
     return true; // Ok, we've failed
 }
